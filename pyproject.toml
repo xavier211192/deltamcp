@@ -1,10 +1,21 @@
 [project]
 name = "deltamcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "FastMCP server for Delta Lake operations"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "deltalake==0.14",
     "polars==1.0.0",
+    "fastmcp",
 ]
+
+[project.scripts]
+deltamcp = "src.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
