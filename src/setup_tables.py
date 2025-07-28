@@ -111,7 +111,7 @@ def create_inventory_table():
     return df
 
 def create_sales_metrics_table():
-    """Create sales metrics table with 90 days of data."""
+    """Create sales metrics table with 30 days of data."""
     print("Creating sales_metrics table...")
     
     # Get existing product codes
@@ -122,13 +122,13 @@ def create_sales_metrics_table():
     sales_metrics = []
     base_date = datetime.now() - timedelta(days=90)
     
-    for day in range(90):
+    for day in range(30):  # Reduced from 90 to 30 days
         current_date = base_date + timedelta(days=day)
         
         for product_code in product_codes:
             for region in regions:
                 # Some days might have no sales
-                if random.random() < 0.7:  # 70% chance of sales
+                if random.random() < 0.5:  # Reduced from 70% to 50% chance of sales
                     sales_count = random.randint(1, 20)
                     base_price = {"0001": 29.99, "0002": 34.99, "0003": 39.99, "0004": 44.99}
                     revenue = round(base_price.get(product_code, 35.00) * sales_count, 2)
@@ -147,12 +147,32 @@ def create_sales_metrics_table():
     print(f"Created sales_metrics table with {len(df)} records at {table_path}")
     return df
 
+def create_product_table():
+    """Create product table with sample records."""
+    print("Creating product table...")
+    
+    data = {
+        'product_code': ['0001', '0002', '0003', '0004'],
+        'color': ['red', 'green', 'blue', 'yellow'],
+        'size': ['small', 'medium', 'large', 'x-large']
+    }
+    
+    df = pl.DataFrame(data).with_columns([
+        pl.lit(True).alias('is_current'),
+    ])
+    
+    table_path = "src/data/deltalake/product"
+    df.write_delta(table_path, mode='overwrite')
+    print(f"Created product table with {len(df)} records at {table_path}")
+    return df
+
 def main():
     """Create all tables."""
     print("Setting up Delta Lake tables...")
     print("=" * 50)
     
     try:
+        product_df = create_product_table()
         customers_df = create_customers_table()
         orders_df = create_orders_table()
         inventory_df = create_inventory_table()
@@ -160,6 +180,7 @@ def main():
         
         print("=" * 50)
         print("All tables created successfully!")
+        print(f"- Product: {len(product_df)} records")
         print(f"- Customers: {len(customers_df)} records")
         print(f"- Orders: {len(orders_df)} records")
         print(f"- Inventory: {len(inventory_df)} records")
