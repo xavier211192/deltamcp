@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "deltamcp": {
+      "command": "/Users/jennifer/.local/bin/uv",
+      "args": ["run", "--directory", "/Users/jennifer/Documents/source/deltamcp", "python", "src/server.py"]
+    }
+  }
+}
