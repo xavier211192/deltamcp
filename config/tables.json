@@ -1,0 +1,24 @@
+{
+  "tables": {
+    "product": {
+      "path": "src/data/deltalake/product",
+      "description": "Product catalog with codes, colors, sizes"
+    },
+    "customers": {
+      "path": "src/data/deltalake/customers", 
+      "description": "Customer information and status"
+    },
+    "orders": {
+      "path": "src/data/deltalake/orders",
+      "description": "Order transactions linking customers to products"
+    },
+    "inventory": {
+      "path": "src/data/deltalake/inventory",
+      "description": "Stock levels across warehouse locations"
+    },
+    "sales_metrics": {
+      "path": "src/data/deltalake/sales_metrics",
+      "description": "Daily sales data by product and region"
+    }
+  }
+}
