@@ -8,6 +8,8 @@ dependencies = [
     "deltalake==0.14",
     "polars==1.0.0",
     "fastmcp",
+    "pytest",
+    "pytest-asyncio",
 ]
 
 [project.scripts]
