@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"deltamcp": {
+			"type": "stdio",
+			"command": "/Users/jennifer/.local/bin/uv",
+			"args": ["run", "--directory", "/Users/jennifer/Documents/source/deltamcp", "python", "src/server.py"]
+		}
+	},
+	"inputs": []
+}
